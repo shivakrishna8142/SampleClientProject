@@ -59,6 +59,7 @@ function Form() {
                 }
 
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('role', response.data.role);
                 setNotice('Validation successful.');
                 navigate('/dashboard'); 
 

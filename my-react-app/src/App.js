@@ -15,6 +15,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/manager" element={<Manager />} />
         <Route path="/user" element={<User />} />
+        <Route path="/unauthorized" element={<main className="App"><p className="login-description">Unauthorized access</p></main>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
