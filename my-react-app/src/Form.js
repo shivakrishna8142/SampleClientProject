@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Form() {
     const navigate = useNavigate();
@@ -8,36 +8,36 @@ function Form() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [authToken, setAuthToken] = useState(null);
 
-    useEffect(() => {
-        if (!authToken) return;
+    // useEffect(() => {
+    //     if (!authToken) return;
 
-        async function verifyToken() {
-            try {
-                const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL || ''}/auth`, {
-                    headers: { Authorization: `Bearer ${authToken}` },
-                });
+    //     async function verifyToken() {
+    //         try {
+    //             const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL || ''}/auth`, {
+    //                 headers: { Authorization: `Bearer ${authToken}` },
+    //             });
 
-                const role = response.data.user?.role;
-                const roleRoutes = {
-                    admin: '/admin',
-                    manager: '/manager',
-                    user: '/user',
-                };
+    //             const role = response.data.user?.role;
+    //             const roleRoutes = {
+    //                 admin: '/admin',
+    //                 manager: '/manager',
+    //                 user: '/user',
+    //             };
 
-                if (roleRoutes[role]) {
-                    navigate(roleRoutes[role]);
-                } else {
-                    setNotice('Your account role is not recognized.');
-                    }
+    //             if (roleRoutes[role]) {
+    //                 navigate(roleRoutes[role]);
+    //             } else {
+    //                 setNotice('Your account role is not recognized.');
+    //                 }
 
-                    setNotice('Authentication successful.');
-                } catch {
-                    setNotice('Unable to verify authentication.');
-                }
-            }
+    //                 setNotice('Authentication successful.');
+    //             } catch {
+    //                 setNotice('Unable to verify authentication.');
+    //             }
+    //         }
 
-        verifyToken();
-        }, [authToken]);
+    //     verifyToken();
+    //     }, [authToken]);
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -59,8 +59,9 @@ function Form() {
                 }
 
                 localStorage.setItem('token', response.data.token);
-                setAuthToken(response.data.token);
                 setNotice('Validation successful.');
+                navigate('/dashboard'); 
+
             } else {
                 setAuthToken(null);
                 setNotice('Invalid username or password.');
@@ -105,6 +106,7 @@ function Form() {
                 </button>
                 <p className="form-notice" role="status">{notice}</p>
             </form>
+            
         </section>
     );
 }

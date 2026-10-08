@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import withRoleHoc from '../RoleHoc';
 
 function Manager() {
   return (
@@ -7,10 +8,13 @@ function Manager() {
         <p className="eyebrow">ROLE PAGE</p>
         <h1>Manager</h1>
         <p className="login-description">Welcome to the manager page.</p>
-        <Link className="back-link" to="/">Back to sign in</Link>
+        <nav className="page-links" aria-label="Page navigation">
+          <Link className="back-link" to="/dashboard">Dashboard</Link>
+          <Link className="back-link" to="/">Back to sign in</Link>
+        </nav>
       </section>
     </main>
   );
 }
 
-export default Manager;
+export default withRoleHoc(Manager, 'manager');
