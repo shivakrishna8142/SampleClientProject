@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Admin from './admin/Admin';
+import ChatApplication from './ChatApplication';
 import Dashboard from './Dashboard';
 import Form from './Form';
 import Manager from './manager/Manager';
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<main className="App"><Form /></main>} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/chat" element={<ChatApplication />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/manager" element={<Manager />} />
         <Route path="/user" element={<User />} />
