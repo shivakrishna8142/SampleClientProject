@@ -5,9 +5,11 @@ import Form from './Form';
 import Manager from './manager/Manager';
 import User from './user/User';
 import './App.css';
+import UserContext from './UserContext';
 
 function App() {
   return (
+    <UserContext.Provider value={{ user: { role: 'admin' } }}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<main className="App"><Form /></main>} />
@@ -19,6 +21,8 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
+
+    </UserContext.Provider>
   );
 }
 
